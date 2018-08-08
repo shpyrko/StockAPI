@@ -27,6 +27,7 @@ def load_daily_json_data(symbol):
 # load daily data
 def load_daily_data(symbol):
         daily_stock_json_data = load_daily_json_data(symbol)
+        final = []
 
         data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close", "Volume"]
 
@@ -43,7 +44,8 @@ def load_daily_data(symbol):
         data_list = [last_time_refreshed, specific_day_high_points, specific_day_low_points, specific_day_open_points,
                  specific_day_close_points, specific_day_volume]
 
-        final = [data_labels, data_list]
+        for i in range(len(data_labels)):
+            final.append((data_labels[i], data_list[i]))
         return final
 
 
