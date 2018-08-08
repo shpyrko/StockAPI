@@ -42,7 +42,7 @@
     {% endif %}
 
   <center>
-    {% block graph %} {% endblock %}
+    {{graph|safe}}
 
     <table style='width: 100%' class='table-striped'>
       {% for label, number in data %}

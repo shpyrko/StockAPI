@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e32e0eca-352f-408d-a6ba-84de7346cc7c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_api_request.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_api_request.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/daily_stock.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/daily_stock.html" afterDir="false" />
-    </list>
+    <list default="true" id="e32e0eca-352f-408d-a6ba-84de7346cc7c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,13 +30,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="459" />
+          <entry key="html" value="485" />
           <entry key="py" value="178" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="459" />
+          <entry key="HTML" value="485" />
           <entry key="Python" value="178" />
         </counts>
       </usages-collector>
@@ -52,8 +47,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/daily_stock.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="40" column="77" selection-start-line="40" selection-start-column="77" selection-end-line="40" selection-end-column="77" />
+            <state relative-caret-position="358">
+              <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
               <folding>
                 <element signature="n#style#0;n#table#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -209,8 +204,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/daily_stock.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="40" column="77" selection-start-line="40" selection-start-column="77" selection-end-line="40" selection-end-column="77" />
+        <state relative-caret-position="358">
+          <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
           <folding>
             <element signature="n#style#0;n#table#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
