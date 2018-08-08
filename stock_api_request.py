@@ -50,7 +50,7 @@ def load_daily_data(symbol):
 
 
 
-
+# current stock price
 def load_intraday_stock_data(symbol):
     r = requests.get("https://www.alphavantage.co/query?function="
                      "TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=5min&apikey=" + key)
@@ -65,9 +65,18 @@ def load_intraday_stock_data(symbol):
         return intraday_data_points[0]
 
 
+# forex json
+def load_forex_json_data(from_curr, to_curr):
+    r = requests.get("https://www.alphavantage.co/query?function="
+                     "FX_DAILY&from_symbol=" + from_curr + "&to_symbol=" + to_curr + "&apikey=" + key)
+
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        return r.json()
 
 
-
+# current forex rate
 def load_forex_rate_data(from_curr, to_curr):
     r = requests.get("https://www.alphavantage.co/query?function="
                      "CURRENCY_EXCHANGE_RATE&from_currency=" + from_curr + "&to_currency=" + to_curr + "&apikey=" + key)
@@ -79,18 +88,21 @@ def load_forex_rate_data(from_curr, to_curr):
         return exchange_rate
 
 
-
+# daily forex data
 def load_daily_forex_data(from_curr, to_curr):
-    r = requests.get("https://www.alphavantage.co/query?function="
-                     "FX_DAILY&from_symbol=" + from_curr + "&to_symbol=" + to_curr + "&apikey=" + key)
-
-    if r.status_code != 200:
-        print("error" + r.status_code)
-    else:
-        daily_forex_json_data = r.json()
-        return daily_forex_json_data
+    data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close", "Volume"]
+    daily_forex_json_data = load_forex_json_data(from_curr, to_curr)
+    forex_last_refreshed = daily_forex_json_data['Meta Data']['5. Last Refreshed']
+    try:
+        forex_open_rate = daily_forex_json_data['T']
 
 
+
+
+    return daily_forex_json_data
+
+
+print(load_daily_forex_data("USD", "EUR"))
 
 
 
@@ -155,5 +167,6 @@ def load_sector_data():
                    five_day_perf_sector, one_month_perf_sector, three_month_perf_sector,
                    ytd_perf_sector, one_year_perf_sector, three_year_perf_sector]
 
-    return sector_json_data['Rank A: Real-Time Performance']
+    return sector_json_data
 """
+

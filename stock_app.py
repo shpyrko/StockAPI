@@ -4,7 +4,7 @@ from stock_api_request import load_daily_data, load_intraday_stock_data
 
 app = Flask(__name__)
 
-
+#TODO Add session with favorites (maybe username and pword)
 @app.route('/')
 def home():
 
@@ -12,6 +12,7 @@ def home():
 
 
 #TODO add different graph views for stock
+
 @app.route('/stock', methods=['POST'])
 def show_daily_stock():
     stock_symbol = request.form['stock_name']
@@ -24,9 +25,8 @@ def show_daily_stock():
     return render_template('daily_stock.html', symbol=stock_symbol, status=status, realtime_points=realtime_points,
                            graph=graph_div, data=data)
 
-#@app.route('/sectors', method=['POST'])
-#def show_sectors():
-#TODO add sectors option (realtime is the only interesting metric)
+@app.route('/forex', method=['POST'])
+def show_forex():
 
 
 
