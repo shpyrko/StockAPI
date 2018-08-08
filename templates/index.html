@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      
+    <title>StockAPI-Project</title>
+      
+    <link rel='stylesheet' href='static/main.css'>  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+    
+    
+  <body>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="{{ url_for('home') }}">Stock-API Project</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Daily Stock Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Sector Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Forex Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Crypto Data</a>
+    </li>
+        </ul>
+      </nav>
+      
+      
+    <div class='container'>
+        <div class='text-center'>
+            <h1 class='pt-4 mt-3' style="color: blue">Stock Quotes</h1>
+        </div>
+
+        <form action="{{ url_for('show_daily_stock') }}" method="POST">
+        <div class='input-group input-group-lg mx-auto w-100 pb-3 pb-1 my-5'>
+            <input name='stock_name' style='height: 100px; font-size: 40px;' class='form-control' type='text' placeholder='Enter Stock Symbol'>
+        </div>
+            <input type='submit' class='btn-primary btn-lg btn-block' value='Search'/>
+        </form>
+
+     </div>                                                   
+  </body>
+    
+    
+    
+</html>

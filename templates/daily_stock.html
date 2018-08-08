@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block symbol %}{% endblock %}</title>
+
+    <link rel='stylesheet' href='static/main.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+
+
+  <body>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="{{ url_for('home') }}">Stock-API Project</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Daily Stock Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Sector Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Forex Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Crypto Data</a>
+    </li>
+        </ul>
+      </nav>
+
+  <div class="row pt-3 mt-3">
+      <h1 class='col-lg-6 pt-3 text-center'>{% block symbol %} {% endblock %} </h1>
+
+
+</html>
