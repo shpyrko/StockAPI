@@ -25,9 +25,9 @@ def create_forex_graph(from_curr, to_curr):
     date_time = []
     close_points = []
     forex_json = load_forex_json_data(from_curr, to_curr)
-    for i in forex_json['Time Series (Daily)']:
+    for i in forex_json['Time Series FX (Daily)']:
         date_time.append(i)
-        close_points.append(float(forex_json['Time Series (Daily)'][i]['4. close']))
+        close_points.append(float(forex_json['Time Series FX (Daily)'][i]['4. close']))
 
     graph = plotly.offline.plot({
         "data": [go.Scatter(x=date_time, y=close_points)],

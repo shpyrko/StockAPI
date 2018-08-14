@@ -37,9 +37,10 @@
             <h1 class='pt-4 mt-3' style="color: blue">Stock Quotes</h1>
         </div>
 
-        <form action="{{ url_for('show_daily_stock') }}" method="POST">
+        <form action="{{ url_for('show_forex') }}" method="POST">
         <div class='input-group input-group-lg mx-auto w-100 pb-3 pb-1 my-5'>
-            <input name='stock_name' style='height: 100px; font-size: 40px;' class='form-control' type='text' placeholder='Enter Stock Symbol'>
+            <input name='currency_name_1' style='height: 100px; font-size: 40px;' class='form-control' type='text' placeholder='Enter First Currency'>
+            <input name='currency_name_2' style='height: 100px; font-size: 40px;' class='form-control' type='text' placeholder='Enter Second Currency'>
         </div>
             <input type='submit' class='btn-primary btn-lg btn-block' value='Search'/>
         </form>

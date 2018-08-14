@@ -9,11 +9,12 @@ current_minute = str(int(datetime.datetime.now().strftime("%M")))
 current_time = current_hour + ":" + current_minute + ":00"
 #date_and_time_frmt = today_date + " " + current_time
 
-today_date = current_year + "-" + current_month + "-" + current_day
-#today_date = '2018-07-27'
+#today_date = current_year + "-" + current_month + "-" + current_day
+today_date = '2018-08-10'
 
 # API KEY = 7JL79SYMCBQPX0I4
 key = "7JL79SYMCBQPX0I4"
+
 def load_daily_json_data(symbol):
     r = requests.get("https://www.alphavantage.co/query?function="
                    "TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + key)
@@ -75,6 +76,7 @@ def load_forex_json_data(from_curr, to_curr):
     else:
         return r.json()
 
+print(load_forex_json_data("USD", "EUR"))
 
 # current forex rate
 def load_forex_rate_data(from_curr, to_curr):
@@ -87,23 +89,40 @@ def load_forex_rate_data(from_curr, to_curr):
         exchange_rate = float(forex_rate_json_data['Realtime Currency Exchange Rate']['5. Exchange Rate'])
         return exchange_rate
 
+"""
+def load_realtime_forex(from_curr, to_curr):
+    intraday_forex_list = []
+    r = requests.get("https://www.alphavantage.co/query?function=FX_INTRADAY&"
+                     "from_symbol=" + from_curr + "&to_symbol=" + to_curr + "&interval=5min&apikey=demo")
 
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        intraday_forex_json = r.json()
+        for i in intraday_forex_json['Time Series FX (5min)']:
+            intraday_forex_list.append(intraday_forex_json['Time Series (5min)'][i]['4. close'])
+
+        return intraday_forex_list[0]
+
+print(load_realtime_forex("EUR", "USD"))
 # daily forex data
+"""
+
 def load_daily_forex_data(from_curr, to_curr):
-    data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close", "Volume"]
+    data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close"]
+    final = []
     daily_forex_json_data = load_forex_json_data(from_curr, to_curr)
+
     forex_last_refreshed = daily_forex_json_data['Meta Data']['5. Last Refreshed']
-    try:
-        forex_open_rate = daily_forex_json_data['T']
+    forex_open_rate = daily_forex_json_data['Time Series FX (Daily)'][today_date]['1. open']
+    forex_high_rate = daily_forex_json_data['Time Series FX (Daily)'][today_date]['2. high']
+    forex_low_rate = daily_forex_json_data['Time Series FX (Daily)'][today_date]['3. low']
+    forex_close_rate = daily_forex_json_data['Time Series FX (Daily)'][today_date]['4. close']
+    data_list = [forex_last_refreshed, forex_high_rate, forex_low_rate, forex_open_rate, forex_close_rate]
 
-
-
-
-    return daily_forex_json_data
-
-
-print(load_daily_forex_data("USD", "EUR"))
-
+    for i in range(len(data_labels)):
+        final.append((data_labels[i], data_list[i]))
+    return final
 
 
 

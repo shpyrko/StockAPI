@@ -1,6 +1,6 @@
 from flask import *
-from graph_generator import create_daily_graph
-from stock_api_request import load_daily_data, load_intraday_stock_data
+from graph_generator import create_daily_graph, create_forex_graph
+from stock_api_request import *
 
 app = Flask(__name__)
 
@@ -11,9 +11,12 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/forex')
+def forex():
+    return render_template('forex_index.html')
 #TODO add different graph views for stock
 
-@app.route('/stock', methods=['POST'])
+@app.route('/stock/daily-quotes', methods=['POST'])
 def show_daily_stock():
     stock_symbol = request.form['stock_name']
     graph_div = create_daily_graph(stock_symbol)
@@ -25,9 +28,18 @@ def show_daily_stock():
     return render_template('daily_stock.html', symbol=stock_symbol, status=status, realtime_points=realtime_points,
                            graph=graph_div, data=data)
 
-@app.route('/forex', method=['POST'])
-def show_forex():
 
+@app.route('/forex/daily-quotes', methods=['POST'])
+def show_forex():
+    currency1 = request.form['currency_name_1']
+    currency2 = request.form['currency_name_2']
+    forex_graph = create_forex_graph(currency1, currency2)
+    realtime_forex = load_forex_rate_data(currency1, currency2)
+    forex_data = load_daily_forex_data(currency1, currency2)
+    status = float(realtime_forex) > float(forex_data[3][1])
+
+    return render_template('daily_forex.html', symbol=currency1 + " / " + currency2, status=status, realtime_points=realtime_forex,
+                           graph=forex_graph, data=forex_data)
 
 
 #TODO add forex page (same as home page but with two form input)
