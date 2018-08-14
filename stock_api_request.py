@@ -15,6 +15,8 @@ today_date = '2018-08-10'
 # API KEY = 7JL79SYMCBQPX0I4
 key = "7JL79SYMCBQPX0I4"
 
+
+#stock json
 def load_daily_json_data(symbol):
     r = requests.get("https://www.alphavantage.co/query?function="
                    "TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + key)
@@ -76,7 +78,6 @@ def load_forex_json_data(from_curr, to_curr):
     else:
         return r.json()
 
-print(load_forex_json_data("USD", "EUR"))
 
 # current forex rate
 def load_forex_rate_data(from_curr, to_curr):
@@ -89,25 +90,7 @@ def load_forex_rate_data(from_curr, to_curr):
         exchange_rate = float(forex_rate_json_data['Realtime Currency Exchange Rate']['5. Exchange Rate'])
         return exchange_rate
 
-"""
-def load_realtime_forex(from_curr, to_curr):
-    intraday_forex_list = []
-    r = requests.get("https://www.alphavantage.co/query?function=FX_INTRADAY&"
-                     "from_symbol=" + from_curr + "&to_symbol=" + to_curr + "&interval=5min&apikey=demo")
-
-    if r.status_code != 200:
-        print("error" + r.status_code)
-    else:
-        intraday_forex_json = r.json()
-        for i in intraday_forex_json['Time Series FX (5min)']:
-            intraday_forex_list.append(intraday_forex_json['Time Series (5min)'][i]['4. close'])
-
-        return intraday_forex_list[0]
-
-print(load_realtime_forex("EUR", "USD"))
-# daily forex data
-"""
-
+# daily forex
 def load_daily_forex_data(from_curr, to_curr):
     data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close"]
     final = []
@@ -124,68 +107,34 @@ def load_daily_forex_data(from_curr, to_curr):
         final.append((data_labels[i], data_list[i]))
     return final
 
+# daily crypto
+def load_daily_crypto_data(crypto_name):
+    r = requests.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY"
+                     "&symbol=" + crypto_name + "&market=CNY&apikey=" + key)
+    data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close"]
+    final = []
 
-
-"""
-def load_sector_data():
-    # list of sectors
-
-    sectors = ['Telecommunication Services', 'Financials', 'Consumer Staples', 'Industrials', 'Consumer Discretionary',
-               'Materials', 'Utilities', 'Energy', 'Health Care', 'Real Estate', 'Information Technology']
-
-    r = requests.get("https://www.alphavantage.co/query?function=SECTOR&apikey=" + key)
     if r.status_code != 200:
         print("error" + r.status_code)
+    else:
+        daily_crypto_json = r.json()
+        crypto_last_refreshed = daily_crypto_json['Meta Data']['7. Last Refreshed']
 
-    sector_json_data = r.json()
+def load_realtime_crypto(crypto_name):
+    r = requests.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_INTRADAY&"
+                     "symbol=" + crypto_name + "&market=USD&apikey=" + key)
+    intraday_crypto_points = []
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        realtime_crypto_json = r.json()
+        for i in realtime_crypto_json['Time Series (Digital Currency Intraday)']:
+            intraday_crypto_points.append(realtime_crypto_json['Time Series (Digital Currency Intraday)'][i]['1a. price (USD)'])
 
-    #refreshed time
-    sector_last_refreshed = sector_json_data['Meta Data']['Last Refreshed']
+        return intraday_crypto_points[0]
 
-    #realtime performace
-    real_time_perf_sector = []
-    for i in sector_json_data['Rank A: Real-Time Performance']:
-        real_time_perf_sector.append(sector_json_data['Rank A: Real-Time Performance'][i])
 
-    #1-day perfomrence
-    one_day_perf_sector = []
-    for i in sector_json_data['Rank B: 1 Day Performance']:
-        one_day_perf_sector.append(sector_json_data['Rank B: 1 Day Performance'][i])
+print(load_daily_crypto_data("BTC"))
 
-    #5 day perf
-    five_day_perf_sector = []
-    for i in sector_json_data['Rank C: 5 Day Performance']:
-        five_day_perf_sector.append(sector_json_data['Rank C: 5 Day Performance'][i])
 
-    #1 month perf
-    one_month_perf_sector = []
-    for i in sector_json_data['Rank D: 1 Month Performance']:
-        one_month_perf_sector.append(sector_json_data['Rank D: 1 Month Performance'][i])
-
-    #3 month perf
-    three_month_perf_sector = []
-    for i in sector_json_data['Rank E: 3 Month Performance']:
-        three_month_perf_sector.append(sector_json_data['Rank E: 3 Month Performance'][i])
-
-    #ytd perf
-    ytd_perf_sector = []
-    for i in sector_json_data['Rank F: Year-to-Date (YTD) Performance']:
-        ytd_perf_sector.append(sector_json_data['Rank F: Year-to-Date (YTD) Performance'][i])
-
-    #one year perf
-    one_year_perf_sector = []
-    for i in sector_json_data['Rank G: 1 Year Performance']:
-        one_year_perf_sector.append(sector_json_data['Rank G: 1 Year Performance'][i])
-
-    # 3 year perf
-    three_year_perf_sector = []
-    for i in sector_json_data['Rank H: 3 Year Performance']:
-        three_year_perf_sector.append(sector_json_data['Rank H: 3 Year Performance'][i])
-
-    sector_data = [sector_last_refreshed, real_time_perf_sector, one_day_perf_sector,
-                   five_day_perf_sector, one_month_perf_sector, three_month_perf_sector,
-                   ytd_perf_sector, one_year_perf_sector, three_year_perf_sector]
-
-    return sector_json_data
-"""
 

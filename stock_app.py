@@ -7,13 +7,17 @@ app = Flask(__name__)
 #TODO Add session with favorites (maybe username and pword)
 @app.route('/')
 def home():
+    return render_template('stock_index.html')
 
-    return render_template('index.html')
-
-
+#TODO dropdown menu for currencies
 @app.route('/forex')
 def forex():
     return render_template('forex_index.html')
+
+@app.route('/crypto')
+def crypto():
+    return render_template("crypto_index.html")
+
 #TODO add different graph views for stock
 
 @app.route('/stock/daily-quotes', methods=['POST'])
@@ -29,6 +33,7 @@ def show_daily_stock():
                            graph=graph_div, data=data)
 
 
+
 @app.route('/forex/daily-quotes', methods=['POST'])
 def show_forex():
     currency1 = request.form['currency_name_1']
@@ -42,7 +47,6 @@ def show_forex():
                            graph=forex_graph, data=forex_data)
 
 
-#TODO add forex page (same as home page but with two form input)
 
 #TODO add crypto data (same as stock)
 if __name__ == '__main__':
