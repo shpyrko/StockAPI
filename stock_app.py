@@ -46,7 +46,7 @@ def show_forex():
     return render_template('daily_forex.html', symbol=currency1 + " / " + currency2, status=status, realtime_points=realtime_forex,
                            graph=forex_graph, data=forex_data)
 
-
+# crypto does NOT need different graph views
 @app.route('/crypto/daily-quotes', methods=['POST'])
 def show_crypto():
     crypto_name = request.form['crypto_name']
@@ -59,6 +59,5 @@ def show_crypto():
                            graph=crypto_graph, data=crypto_data)
 
 
-#TODO add crypto data (same as stock)
 if __name__ == '__main__':
     app.run(debug=True)
