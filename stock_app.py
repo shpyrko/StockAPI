@@ -1,5 +1,5 @@
 from flask import *
-from graph_generator import create_daily_graph, create_forex_graph
+from graph_generator import *
 from stock_api_request import *
 
 app = Flask(__name__)
@@ -46,6 +46,17 @@ def show_forex():
     return render_template('daily_forex.html', symbol=currency1 + " / " + currency2, status=status, realtime_points=realtime_forex,
                            graph=forex_graph, data=forex_data)
 
+
+@app.route('/crypto/daily-quotes', methods=['POST'])
+def show_crypto():
+    crypto_name = request.form['crypto_name']
+    crypto_graph = create_crypto_graph(crypto_name)
+    realtime_crypto = load_realtime_crypto(crypto_name)
+    crypto_data = load_daily_crypto_data(crypto_name)
+    status = float(realtime_crypto) > float(crypto_data[3][1])
+
+    return render_template('daily_crypto.html', symbol=crypto_name, status=status, realtime_points=realtime_crypto,
+                           graph=crypto_graph, data=crypto_data)
 
 
 #TODO add crypto data (same as stock)

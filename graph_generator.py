@@ -1,4 +1,4 @@
-from stock_api_request import load_daily_data, load_daily_json_data, load_forex_json_data
+from stock_api_request import load_crypto_json, load_daily_json_data, load_forex_json_data
 import plotly
 import plotly.graph_objs as go
 
@@ -41,10 +41,20 @@ def create_forex_graph(from_curr, to_curr):
 
 
 
-"""
-def create_sector_graph():
-    data = load_sector_data()
-    data_time = []
-    sector_points = []
-    for i in data[]
-"""
+def create_crypto_graph(crypto_curr):
+    date_time = []
+    close_points = []
+    crypto_json = load_crypto_json(crypto_curr)
+    for i in crypto_json['Time Series (Digital Currency Daily)']:
+        date_time.append(i)
+        close_points.append(float(crypto_json['Time Series (Digital Currency Daily)'][i]['4a. close (USD)']))
+
+    graph = plotly.offline.plot({
+        "data": [go.Scatter(x=date_time, y=close_points)],
+        "layout": go.Layout(
+            autosize=False,
+            width=800,
+            height=650, )
+    }, output_type='div', show_link=False)
+
+    return graph

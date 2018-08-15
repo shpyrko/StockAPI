@@ -9,12 +9,12 @@ current_minute = str(int(datetime.datetime.now().strftime("%M")))
 current_time = current_hour + ":" + current_minute + ":00"
 #date_and_time_frmt = today_date + " " + current_time
 
-#today_date = current_year + "-" + current_month + "-" + current_day
-today_date = '2018-08-10'
+today_date = current_year + "-" + current_month + "-" + current_day
+#today_date = '2018-08-10'
 
 # API KEY = 7JL79SYMCBQPX0I4
 key = "7JL79SYMCBQPX0I4"
-
+# TODO different keys for daily and intraday requests
 
 #stock json
 def load_daily_json_data(symbol):
@@ -107,10 +107,20 @@ def load_daily_forex_data(from_curr, to_curr):
         final.append((data_labels[i], data_list[i]))
     return final
 
+# crypto json
+def load_crypto_json(crypto_curr):
+    r = requests.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY"
+                     "&symbol=" + crypto_curr + "&market=USD&apikey=" + key)
+
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        return r.json()
+
 # daily crypto
 def load_daily_crypto_data(crypto_name):
     r = requests.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY"
-                     "&symbol=" + crypto_name + "&market=CNY&apikey=" + key)
+                     "&symbol=" + crypto_name + "&market=USD&apikey=" + key)
     data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close"]
     final = []
 
@@ -118,7 +128,20 @@ def load_daily_crypto_data(crypto_name):
         print("error" + r.status_code)
     else:
         daily_crypto_json = r.json()
-        crypto_last_refreshed = daily_crypto_json['Meta Data']['7. Last Refreshed']
+        crypto_last_refreshed = daily_crypto_json['Meta Data']['6. Last Refreshed']
+        today_date = crypto_last_refreshed[:10]
+        crypto_open_points = daily_crypto_json['Time Series (Digital Currency Daily)'][today_date]['1a. open (USD)']
+        crypto_high_points = daily_crypto_json['Time Series (Digital Currency Daily)'][today_date]['2a. high (USD)']
+        crypto_low_points = daily_crypto_json['Time Series (Digital Currency Daily)'][today_date]['3a. low (USD)']
+        crypto_close_points = daily_crypto_json['Time Series (Digital Currency Daily)'][today_date]['4a. close (USD)']
+        crypto_volume = daily_crypto_json['Time Series (Digital Currency Daily)'][today_date]['5. volume']
+        data_list = [crypto_last_refreshed, crypto_high_points, crypto_low_points, crypto_open_points,
+                     crypto_close_points, crypto_volume]
+
+        for i in range(len(data_labels)):
+            final.append((data_labels[i], data_list[i]))
+        return final
+
 
 def load_realtime_crypto(crypto_name):
     r = requests.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_INTRADAY&"
@@ -132,9 +155,5 @@ def load_realtime_crypto(crypto_name):
             intraday_crypto_points.append(realtime_crypto_json['Time Series (Digital Currency Intraday)'][i]['1a. price (USD)'])
 
         return intraday_crypto_points[0]
-
-
-print(load_daily_crypto_data("BTC"))
-
 
 
