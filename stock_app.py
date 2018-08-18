@@ -4,12 +4,11 @@ from stock_api_request import *
 
 app = Flask(__name__)
 
-#TODO Add session with favorites (maybe username and pword)
+#TODO Add session with favorites (maybe login)
 @app.route('/')
 def home():
     return render_template('stock_index.html')
 
-#TODO dropdown menu for currencies
 @app.route('/forex')
 def forex():
     return render_template('forex_index.html')

@@ -12,14 +12,14 @@ current_time = current_hour + ":" + current_minute + ":00"
 today_date = current_year + "-" + current_month + "-" + current_day
 #today_date = '2018-08-10'
 
-# API KEY = 7JL79SYMCBQPX0I4
-key = "7JL79SYMCBQPX0I4"
-# TODO different keys for daily and intraday requests
+daily_key = "7JL79SYMCBQPX0I4"
+intraday_key = "WFV2JIQ61QD7N0SB"
+
 
 #stock json
 def load_daily_json_data(symbol):
     r = requests.get("https://www.alphavantage.co/query?function="
-                   "TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + key)
+                   "TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + daily_key)
 
     if r.status_code != 200:
         print("error" + r.status_code)
@@ -56,7 +56,7 @@ def load_daily_data(symbol):
 # current stock price
 def load_intraday_stock_data(symbol):
     r = requests.get("https://www.alphavantage.co/query?function="
-                     "TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=5min&apikey=" + key)
+                     "TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=5min&apikey=" + intraday_key)
     intraday_data_points = []
     if r.status_code != 200:
         print("error" + r.status_code)
@@ -71,7 +71,7 @@ def load_intraday_stock_data(symbol):
 # forex json
 def load_forex_json_data(from_curr, to_curr):
     r = requests.get("https://www.alphavantage.co/query?function="
-                     "FX_DAILY&from_symbol=" + from_curr + "&to_symbol=" + to_curr + "&apikey=" + key)
+                     "FX_DAILY&from_symbol=" + from_curr + "&to_symbol=" + to_curr + "&apikey=" + daily_key)
 
     if r.status_code != 200:
         print("error" + r.status_code)
@@ -82,7 +82,8 @@ def load_forex_json_data(from_curr, to_curr):
 # current forex rate
 def load_forex_rate_data(from_curr, to_curr):
     r = requests.get("https://www.alphavantage.co/query?function="
-                     "CURRENCY_EXCHANGE_RATE&from_currency=" + from_curr + "&to_currency=" + to_curr + "&apikey=" + key)
+                     "CURRENCY_EXCHANGE_RATE&from_currency=" + from_curr + "&to_currency=" + to_curr + "&apikey=" +
+                     intraday_key)
     if r.status_code != 200:
         print("error" + r.status_code)
     else:
@@ -110,7 +111,7 @@ def load_daily_forex_data(from_curr, to_curr):
 # crypto json
 def load_crypto_json(crypto_curr):
     r = requests.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY"
-                     "&symbol=" + crypto_curr + "&market=USD&apikey=" + key)
+                     "&symbol=" + crypto_curr + "&market=USD&apikey=" + daily_key)
 
     if r.status_code != 200:
         print("error" + r.status_code)
@@ -120,7 +121,7 @@ def load_crypto_json(crypto_curr):
 # daily crypto
 def load_daily_crypto_data(crypto_name):
     r = requests.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY"
-                     "&symbol=" + crypto_name + "&market=USD&apikey=" + key)
+                     "&symbol=" + crypto_name + "&market=USD&apikey=" + daily_key)
     data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close"]
     final = []
 
@@ -145,7 +146,7 @@ def load_daily_crypto_data(crypto_name):
 
 def load_realtime_crypto(crypto_name):
     r = requests.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_INTRADAY&"
-                     "symbol=" + crypto_name + "&market=USD&apikey=" + key)
+                     "symbol=" + crypto_name + "&market=USD&apikey=" + intraday_key)
     intraday_crypto_points = []
     if r.status_code != 200:
         print("error" + r.status_code)
