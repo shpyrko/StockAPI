@@ -15,6 +15,15 @@ today_date = current_year + "-" + current_month + "-" + current_day
 daily_key = "7JL79SYMCBQPX0I4"
 intraday_key = "WFV2JIQ61QD7N0SB"
 
+#checks if market is open
+def check_time():
+    check = False
+    if datetime.date(int(current_year), int(current_month), int(current_day)).weekday() > 4:
+        check = True
+    if int(current_hour) > 17 or int(current_hour) < 9:
+        check = True
+    return check
+
 
 #stock json
 def load_daily_json_data(symbol):
@@ -29,28 +38,30 @@ def load_daily_json_data(symbol):
 
 # load daily data
 def load_daily_data(symbol):
+        check = check_time()
+        data_list = []
         daily_stock_json_data = load_daily_json_data(symbol)
         final = []
 
         data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close", "Volume"]
 
         last_time_refreshed = daily_stock_json_data['Meta Data']['3. Last Refreshed']
-        try:
-            specific_day_open_points = daily_stock_json_data['Time Series (Daily)'][today_date]['1. open']
-        except KeyError:
-            return "Market Closed"
 
-        specific_day_high_points = daily_stock_json_data['Time Series (Daily)'][today_date]['2. high']
-        specific_day_low_points = daily_stock_json_data['Time Series (Daily)'][today_date]['3. low']
-        specific_day_close_points = daily_stock_json_data['Time Series (Daily)'][today_date]['4. close']
-        specific_day_volume = daily_stock_json_data['Time Series (Daily)'][today_date]['5. volume']
-        data_list = [last_time_refreshed, specific_day_high_points, specific_day_low_points, specific_day_open_points,
+        if check:
+            pass
+        else:
+            specific_day_open_points = daily_stock_json_data['Time Series (Daily)'][today_date]['1. open']
+            specific_day_high_points = daily_stock_json_data['Time Series (Daily)'][today_date]['2. high']
+            specific_day_low_points = daily_stock_json_data['Time Series (Daily)'][today_date]['3. low']
+            specific_day_close_points = daily_stock_json_data['Time Series (Daily)'][today_date]['4. close']
+            specific_day_volume = daily_stock_json_data['Time Series (Daily)'][today_date]['5. volume']
+            data_list = [last_time_refreshed, specific_day_high_points, specific_day_low_points, specific_day_open_points,
                  specific_day_close_points, specific_day_volume]
+
 
         for i in range(len(data_labels)):
             final.append((data_labels[i], data_list[i]))
         return final
-
 
 
 # current stock price

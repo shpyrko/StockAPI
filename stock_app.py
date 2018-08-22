@@ -5,9 +5,13 @@ from stock_api_request import *
 app = Flask(__name__)
 
 #TODO Add session with favorites (maybe login)
+#TODO add market closed sign & functionailty when closed
+#TODO add advanced analytical graphs for stock (new key)
+#TODO refresh automatically
+
 @app.route('/')
 def home():
-    return render_template('stock_index.html')
+    return render_template('stock_index.html', check = check_time())
 
 @app.route('/forex')
 def forex():
