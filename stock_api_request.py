@@ -47,22 +47,19 @@ def load_daily_data(symbol):
 
         last_time_refreshed = daily_stock_json_data['Meta Data']['3. Last Refreshed']
 
-        if check:
-            pass
-        else:
-            specific_day_open_points = daily_stock_json_data['Time Series (Daily)'][today_date]['1. open']
-            specific_day_high_points = daily_stock_json_data['Time Series (Daily)'][today_date]['2. high']
-            specific_day_low_points = daily_stock_json_data['Time Series (Daily)'][today_date]['3. low']
-            specific_day_close_points = daily_stock_json_data['Time Series (Daily)'][today_date]['4. close']
-            specific_day_volume = daily_stock_json_data['Time Series (Daily)'][today_date]['5. volume']
-            data_list = [last_time_refreshed, specific_day_high_points, specific_day_low_points, specific_day_open_points,
+        specific_day_open_points = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['1. open']
+        specific_day_high_points = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['2. high']
+        specific_day_low_points = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['3. low']
+        specific_day_close_points = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['4. close']
+        specific_day_volume = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['5. volume']
+
+        data_list = [last_time_refreshed, specific_day_high_points, specific_day_low_points, specific_day_open_points,
                  specific_day_close_points, specific_day_volume]
 
 
         for i in range(len(data_labels)):
             final.append((data_labels[i], data_list[i]))
         return final
-
 
 # current stock price
 def load_intraday_stock_data(symbol):
@@ -89,7 +86,6 @@ def load_forex_json_data(from_curr, to_curr):
     else:
         return r.json()
 
-
 # current forex rate
 def load_forex_rate_data(from_curr, to_curr):
     r = requests.get("https://www.alphavantage.co/query?function="
@@ -109,10 +105,10 @@ def load_daily_forex_data(from_curr, to_curr):
     daily_forex_json_data = load_forex_json_data(from_curr, to_curr)
 
     forex_last_refreshed = daily_forex_json_data['Meta Data']['5. Last Refreshed']
-    forex_open_rate = daily_forex_json_data['Time Series FX (Daily)'][today_date]['1. open']
-    forex_high_rate = daily_forex_json_data['Time Series FX (Daily)'][today_date]['2. high']
-    forex_low_rate = daily_forex_json_data['Time Series FX (Daily)'][today_date]['3. low']
-    forex_close_rate = daily_forex_json_data['Time Series FX (Daily)'][today_date]['4. close']
+    forex_open_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_refreshed]['1. open']
+    forex_high_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_refreshed]['2. high']
+    forex_low_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_refreshed]['3. low']
+    forex_close_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_refreshed]['4. close']
     data_list = [forex_last_refreshed, forex_high_rate, forex_low_rate, forex_open_rate, forex_close_rate]
 
     for i in range(len(data_labels)):

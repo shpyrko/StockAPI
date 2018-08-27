@@ -5,7 +5,6 @@ from stock_api_request import *
 app = Flask(__name__)
 
 #TODO Add session with favorites (maybe login)
-#TODO add market closed sign & functionailty when closed
 #TODO add advanced analytical graphs for stock (new key) https://plot.ly/python/line-charts/
 #TODO refresh automatically
 #TODO maybe incorporate crypto exchange from https://coinswitch.co/tools?utm_source=ph
