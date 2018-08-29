@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e32e0eca-352f-408d-a6ba-84de7346cc7c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/graph_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,29 +39,28 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="771" />
-          <entry key="py" value="6043" />
+          <entry key="py" value="6106" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="771" />
-          <entry key="Python" value="6043" />
+          <entry key="Python" value="6106" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stock_app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="29" column="49" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
+            <state relative-caret-position="105">
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
-                <marker date="1535507614957" expanded="true" signature="617:679" ph="..." />
-                <marker date="1535507614957" expanded="true" signature="3383:3933" ph="..." />
-                <marker date="1535507614957" expanded="true" signature="4050:4517" ph="..." />
+                <marker date="1535509891143" expanded="true" signature="3401:3951" ph="..." />
+                <marker date="1535509891143" expanded="true" signature="4068:4535" ph="..." />
               </folding>
             </state>
           </provider>
@@ -82,7 +81,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graph_generator.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="339">
@@ -121,8 +120,8 @@
         <option value="$PROJECT_DIR$/templates/forex_index.html" />
         <option value="$PROJECT_DIR$/generate dropdowns html.py" />
         <option value="$PROJECT_DIR$/stock_api_request.py" />
-        <option value="$PROJECT_DIR$/stock_app.py" />
         <option value="$PROJECT_DIR$/graph_generator.py" />
+        <option value="$PROJECT_DIR$/stock_app.py" />
       </list>
     </option>
   </component>
@@ -289,19 +288,6 @@
     <entry file="file://$PROJECT_DIR$/templates/daily_crypto.html" />
     <entry file="file://$PROJECT_DIR$/dropdown.html" />
     <entry file="file://$PROJECT_DIR$/generate dropdowns html.py" />
-    <entry file="file://$PROJECT_DIR$/stock_app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="29" column="49" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-            <marker date="1535507614957" expanded="true" signature="617:679" ph="..." />
-            <marker date="1535507614957" expanded="true" signature="3383:3933" ph="..." />
-            <marker date="1535507614957" expanded="true" signature="4050:4517" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stock_api_request.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2114">
@@ -324,6 +310,18 @@
             <marker date="1535508395367" expanded="true" signature="115:691" ph="..." />
             <marker date="1535508395367" expanded="true" signature="2608:3115" ph="..." />
             <marker date="1535508395367" expanded="true" signature="3158:3689" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stock_app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1535509891143" expanded="true" signature="3401:3951" ph="..." />
+            <marker date="1535509891143" expanded="true" signature="4068:4535" ph="..." />
           </folding>
         </state>
       </provider>

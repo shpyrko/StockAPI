@@ -5,9 +5,11 @@ import requests
 
 app = Flask(__name__)
 
-#TODO Add session with favorites (maybe login)
+#TODO change stock api
 #TODO add advanced analytical graphs for stock (new key) https://plot.ly/python/line-charts/
+#TODO add percentage change from open
 #TODO refresh automatically
+#TODO Add session with favorites (maybe login)
 #TODO maybe incorporate crypto exchange from https://coinswitch.co/tools?utm_source=ph
 
 @app.route('/')
@@ -21,8 +23,6 @@ def forex():
 @app.route('/crypto')
 def crypto():
     return render_template("index_pages/crypto_index.html")
-
-#TODO add different graph views for stock
 
 @app.route('/stock/today/<stock_symbol>', methods=['POST', 'GET'])
 def load_today_stock(stock_symbol):
