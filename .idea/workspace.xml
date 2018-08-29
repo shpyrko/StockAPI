@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e32e0eca-352f-408d-a6ba-84de7346cc7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/graph_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_api_request.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_api_request.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/daily_pages/daily_stock.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/daily_pages/daily_stock.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index_pages/stock_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index_pages/stock_index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,13 +39,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="771" />
-          <entry key="py" value="6039" />
+          <entry key="py" value="6043" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="771" />
-          <entry key="Python" value="6039" />
+          <entry key="Python" value="6043" />
         </counts>
       </usages-collector>
     </session>
@@ -74,7 +70,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stock_api_request.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-313">
+            <state relative-caret-position="-2114">
               <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
               <folding>
                 <marker date="1535507523727" expanded="true" signature="875:878" ph="..." />
@@ -89,13 +85,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/graph_generator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+            <state relative-caret-position="339">
+              <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
-                <marker date="1535507904319" expanded="true" signature="115:691" ph="..." />
-                <marker date="1535507904319" expanded="true" signature="2347:2854" ph="..." />
-                <marker date="1535507904319" expanded="true" signature="2897:3428" ph="..." />
+                <marker date="1535508395367" expanded="true" signature="115:691" ph="..." />
+                <marker date="1535508395367" expanded="true" signature="2608:3115" ph="..." />
+                <marker date="1535508395367" expanded="true" signature="3158:3689" ph="..." />
               </folding>
             </state>
           </provider>
@@ -293,19 +289,6 @@
     <entry file="file://$PROJECT_DIR$/templates/daily_crypto.html" />
     <entry file="file://$PROJECT_DIR$/dropdown.html" />
     <entry file="file://$PROJECT_DIR$/generate dropdowns html.py" />
-    <entry file="file://$PROJECT_DIR$/stock_api_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-313">
-          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-          <folding>
-            <marker date="1535507523727" expanded="true" signature="875:878" ph="..." />
-            <marker date="1535507523727" expanded="true" signature="876:878" ph="..." />
-            <marker date="1535507523727" expanded="true" signature="2462:2463" ph="..." />
-            <marker date="1535507523727" expanded="true" signature="3092:3397" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stock_app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
@@ -319,15 +302,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/stock_api_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2114">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding>
+            <marker date="1535507523727" expanded="true" signature="875:878" ph="..." />
+            <marker date="1535507523727" expanded="true" signature="876:878" ph="..." />
+            <marker date="1535507523727" expanded="true" signature="2462:2463" ph="..." />
+            <marker date="1535507523727" expanded="true" signature="3092:3397" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/graph_generator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+        <state relative-caret-position="339">
+          <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
-            <marker date="1535507904319" expanded="true" signature="115:691" ph="..." />
-            <marker date="1535507904319" expanded="true" signature="2347:2854" ph="..." />
-            <marker date="1535507904319" expanded="true" signature="2897:3428" ph="..." />
+            <marker date="1535508395367" expanded="true" signature="115:691" ph="..." />
+            <marker date="1535508395367" expanded="true" signature="2608:3115" ph="..." />
+            <marker date="1535508395367" expanded="true" signature="3158:3689" ph="..." />
           </folding>
         </state>
       </provider>

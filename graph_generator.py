@@ -53,9 +53,19 @@ def create_6_month_stock_graph(symbol):
         date_time.append(i)
         close_points.append(float(json_data['Time Series (Daily)'][i]['4. close']))
 
-    for i in range(len(date_time) - 184):
+    for i in range(len(date_time) - 131):
         date_time.pop()
         close_points.pop()
+
+    graph = plotly.offline.plot({
+        "data": [go.Scatter(x=date_time, y=close_points)],
+        "layout": go.Layout(
+            autosize=False,
+            width=800,
+            height=650, )
+    }, output_type='div', show_link=False)
+
+    return graph
 
 def create_1_year_stock_graph(symbol):
     date_time = []
