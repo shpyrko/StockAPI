@@ -46,12 +46,12 @@ def load_daily_data(symbol):
         data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close", "Volume"]
 
         last_time_refreshed = daily_stock_json_data['Meta Data']['3. Last Refreshed']
-
-        specific_day_open_points = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['1. open']
-        specific_day_high_points = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['2. high']
-        specific_day_low_points = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['3. low']
-        specific_day_close_points = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['4. close']
-        specific_day_volume = daily_stock_json_data['Time Series (Daily)'][last_time_refreshed]['5. volume']
+        last_day_refreshed = last_time_refreshed[:10]
+        specific_day_open_points = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['1. open']
+        specific_day_high_points = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['2. high']
+        specific_day_low_points = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['3. low']
+        specific_day_close_points = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['4. close']
+        specific_day_volume = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['5. volume']
 
         data_list = [last_time_refreshed, specific_day_high_points, specific_day_low_points, specific_day_open_points,
                  specific_day_close_points, specific_day_volume]
@@ -75,6 +75,14 @@ def load_intraday_stock_data(symbol):
 
         return intraday_data_points[0]
 
+def load_intraday_stock_json(symbol):
+    r = requests.get("https://www.alphavantage.co/query?function="
+                     "TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=5min&apikey=" + intraday_key)
+    intraday_data_points = []
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        return r.json()
 
 # forex json
 def load_forex_json_data(from_curr, to_curr):
@@ -104,12 +112,13 @@ def load_daily_forex_data(from_curr, to_curr):
     final = []
     daily_forex_json_data = load_forex_json_data(from_curr, to_curr)
 
-    forex_last_refreshed = daily_forex_json_data['Meta Data']['5. Last Refreshed']
-    forex_open_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_refreshed]['1. open']
-    forex_high_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_refreshed]['2. high']
-    forex_low_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_refreshed]['3. low']
-    forex_close_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_refreshed]['4. close']
-    data_list = [forex_last_refreshed, forex_high_rate, forex_low_rate, forex_open_rate, forex_close_rate]
+    forex_last_time_refreshed = daily_forex_json_data['Meta Data']['5. Last Refreshed']
+    forex_last_day_refreshed = forex_last_time_refreshed[:10]
+    forex_open_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_day_refreshed]['1. open']
+    forex_high_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_day_refreshed]['2. high']
+    forex_low_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_day_refreshed]['3. low']
+    forex_close_rate = daily_forex_json_data['Time Series FX (Daily)'][forex_last_day_refreshed]['4. close']
+    data_list = [forex_last_time_refreshed, forex_high_rate, forex_low_rate, forex_open_rate, forex_close_rate]
 
     for i in range(len(data_labels)):
         final.append((data_labels[i], data_list[i]))
@@ -163,5 +172,15 @@ def load_realtime_crypto(crypto_name):
             intraday_crypto_points.append(realtime_crypto_json['Time Series (Digital Currency Intraday)'][i]['1a. price (USD)'])
 
         return intraday_crypto_points[0]
+
+
+def load_all_time_stock(symbol):
+    r = requests.get("https://www.alphavantage.co/query?function="
+                     "TIME_SERIES_DAILY&symbol=" + symbol + "&outputsize=full&apikey=" + daily_key)
+
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        return r.json()
 
 

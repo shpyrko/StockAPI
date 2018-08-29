@@ -1,6 +1,7 @@
 from flask import *
 from graph_generator import *
 from stock_api_request import *
+import requests
 
 app = Flask(__name__)
 
@@ -23,10 +24,11 @@ def crypto():
 
 #TODO add different graph views for stock
 
-@app.route('/stock/daily-quotes', methods=['POST'])
-def show_daily_stock():
-    stock_symbol = request.form['stock_name']
-    graph_div = create_daily_graph(stock_symbol)
+@app.route('/stock/today/<stock_symbol>', methods=['POST', 'GET'])
+def load_today_stock(stock_symbol):
+    if stock_symbol == "Entry":
+        stock_symbol = request.form['stock_name']
+    graph_div = create_1_day_stock_graph(stock_symbol)
     realtime_points = load_intraday_stock_data(stock_symbol)
     data = load_daily_data(stock_symbol)
 
@@ -34,6 +36,51 @@ def show_daily_stock():
 
     return render_template('daily_pages/daily_stock.html', symbol=stock_symbol, status=status, realtime_points=realtime_points,
                            graph=graph_div, data=data)
+
+@app.route('/stock/3-months/<stock_symbol>', methods=['GET'])
+def load_3_months_stock(stock_symbol):
+    graph_div = create_3_months_stock_graph(stock_symbol)
+    realtime_points = load_intraday_stock_data(stock_symbol)
+    data = load_daily_data(stock_symbol)
+
+    status = float(realtime_points) > float(data[3][1])
+
+    return render_template('daily_pages/daily_stock.html', symbol=stock_symbol, status=status, realtime_points=realtime_points,
+                           graph=graph_div, data=data)
+
+@app.route('/stock/6-months/<stock_symbol>', methods=['GET'])
+def load_6_months_stock(stock_symbol):
+    graph_div = create_6_month_stock_graph(stock_symbol)
+    realtime_points = load_intraday_stock_data(stock_symbol)
+    data = load_daily_data(stock_symbol)
+
+    status = float(realtime_points) > float(data[3][1])
+
+    return render_template('daily_pages/daily_stock.html', symbol=stock_symbol, status=status, realtime_points=realtime_points,
+                           graph=graph_div, data=data)
+
+@app.route('/stock/1-year/<stock_symbol>', methods=['GET'])
+def load_1_year_stock(stock_symbol):
+    graph_div = create_1_year_stock_graph(stock_symbol)
+    realtime_points = load_intraday_stock_data(stock_symbol)
+    data = load_daily_data(stock_symbol)
+
+    status = float(realtime_points) > float(data[3][1])
+
+    return render_template('daily_pages/daily_stock.html', symbol=stock_symbol, status=status, realtime_points=realtime_points,
+                           graph=graph_div, data=data)
+
+@app.route('/stock/all-time/<stock_symbol>', methods=['GET'])
+def load_all_time_stock(stock_symbol):
+    graph_div = create_all_time_stock_graph(stock_symbol)
+    realtime_points = load_intraday_stock_data(stock_symbol)
+    data = load_daily_data(stock_symbol)
+
+    status = float(realtime_points) > float(data[3][1])
+
+    return render_template('daily_pages/daily_stock.html', symbol=stock_symbol, status=status, realtime_points=realtime_points,
+                           graph=graph_div, data=data)
+
 
 
 

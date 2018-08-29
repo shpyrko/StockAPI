@@ -57,11 +57,11 @@
         </div>
         
 
-        <form action="{{ url_for('show_daily_stock') }}" method="POST">
+        <form action="{{ url_for('load_today_stock', stock_symbol="Entry") }}" method="POST">
         <div class='input-group input-group-lg mx-auto w-100 pb-3 pb-1 my-5'>
             <input name='stock_name' style='height: 100px; font-size: 40px;' class='form-control' type='text' placeholder='Enter Stock Symbol'>
         </div>
-            <input type='submit' class='btn-primary btn-lg btn-block' value='Search'/>
+        <input type='submit' id="stock_symbol" class='btn-primary btn-lg btn-block' value='Search'/>
         </form>
 
      </div>                                                   

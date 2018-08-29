@@ -57,6 +57,18 @@
   <center>
     {{graph|safe}}
 
+    <div class="dropdown pb-3">
+        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Change Graph
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{{ url_for('load_today_stock', stock_symbol=symbol) }}">Today</a>
+            <a class="dropdown-item" href="{{ url_for('load_3_months_stock', stock_symbol=symbol) }}">3 Months</a>
+            <a class="dropdown-item" href="{{ url_for('load_6_months_stock', stock_symbol=symbol) }}">6 Months</a>
+            <a class="dropdown-item" href="{{ url_for('load_1_year_stock', stock_symbol=symbol) }}">1 Year</a>
+            <a class="dropdown-item" href="{{ url_for('load_all_time_stock', stock_symbol=symbol) }}">All-time</a>
+        </div>
+    </div>
       
     <table style='width: 100%' class='table-striped'>
       {% for label, number in data %}
