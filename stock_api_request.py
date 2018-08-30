@@ -15,7 +15,7 @@ today_date = current_year + "-" + current_month + "-" + current_day
 daily_key = "7JL79SYMCBQPX0I4"
 intraday_key = "WFV2JIQ61QD7N0SB"
 
-#checks if market is open
+#checks if market is open returns boolean
 def check_time():
     check = False
     if datetime.date(int(current_year), int(current_month), int(current_day)).weekday() > 4:
@@ -27,31 +27,26 @@ def check_time():
 
 #stock json
 def load_daily_json_data(symbol):
-    r = requests.get("https://www.alphavantage.co/query?function="
-                   "TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + daily_key)
+    r = requests.get("https://api.iextrading.com/1.0/stock/" + symbol + "/quote")
 
     if r.status_code != 200:
         print("error" + r.status_code)
     else:
         return r.json()
 
-
-# load daily data
-def load_daily_data(symbol):
-        check = check_time()
-        data_list = []
+# load daily data returned as tuple list
+def load_today_data(symbol):
         daily_stock_json_data = load_daily_json_data(symbol)
         final = []
 
         data_labels = ["Last Time Refreshed", "Day High", "Day Low", "Day Open", "Day Close", "Volume"]
 
-        last_time_refreshed = daily_stock_json_data['Meta Data']['3. Last Refreshed']
-        last_day_refreshed = last_time_refreshed[:10]
-        specific_day_open_points = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['1. open']
-        specific_day_high_points = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['2. high']
-        specific_day_low_points = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['3. low']
-        specific_day_close_points = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['4. close']
-        specific_day_volume = daily_stock_json_data['Time Series (Daily)'][last_day_refreshed]['5. volume']
+        last_time_refreshed = daily_stock_json_data['latestTime']
+        specific_day_open_points = daily_stock_json_data['open']
+        specific_day_high_points = daily_stock_json_data['high']
+        specific_day_low_points = daily_stock_json_data['low']
+        specific_day_close_points = daily_stock_json_data['close']
+        specific_day_volume = daily_stock_json_data['latestVolume']
 
         data_list = [last_time_refreshed, specific_day_high_points, specific_day_low_points, specific_day_open_points,
                  specific_day_close_points, specific_day_volume]
@@ -61,28 +56,54 @@ def load_daily_data(symbol):
             final.append((data_labels[i], data_list[i]))
         return final
 
-# current stock price
-def load_intraday_stock_data(symbol):
-    r = requests.get("https://www.alphavantage.co/query?function="
-                     "TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=5min&apikey=" + intraday_key)
-    intraday_data_points = []
-    if r.status_code != 200:
-        print("error" + r.status_code)
-    else:
-        intraday_stock_json_data = r.json()
-        for i in intraday_stock_json_data['Time Series (5min)']:
-            intraday_data_points.append(intraday_stock_json_data['Time Series (5min)'][i]['4. close'])
-
-        return intraday_data_points[0]
-
-def load_intraday_stock_json(symbol):
-    r = requests.get("https://www.alphavantage.co/query?function="
-                     "TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=5min&apikey=" + intraday_key)
-    intraday_data_points = []
+# current stock price returned as int
+def load_realtime_stock_price(symbol):
+    r = requests.get("https://api.iextrading.com/1.0/stock/" + symbol + "/price")
     if r.status_code != 200:
         print("error" + r.status_code)
     else:
         return r.json()
+
+def load_intraday_stock_json(symbol):
+    r = requests.get("https://api.iextrading.com/1.0/stock/" + symbol + "/chart/1d")
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        return r.json()
+
+def load_3_month_stock(symbol):
+    r = requests.get("https://api.iextrading.com/1.0/stock/" + symbol + "/chart/3m")
+
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        return r.json()
+
+def load_6_month_stock(symbol):
+    r = requests.get("https://api.iextrading.com/1.0/stock/" + symbol + "/chart/6m")
+
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        return r.json()
+
+def load_1_year_stock(symbol):
+    r = requests.get("https://api.iextrading.com/1.0/stock/" + symbol + "/chart/1y")
+
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        return r.json()
+
+def load_5_year_stock(symbol):
+    r = requests.get("https://api.iextrading.com/1.0/stock/" + symbol + "/chart/5y")
+
+    if r.status_code != 200:
+        print("error" + r.status_code)
+    else:
+        return r.json()
+
+
 
 # forex json
 def load_forex_json_data(from_curr, to_curr):
@@ -174,13 +195,5 @@ def load_realtime_crypto(crypto_name):
         return intraday_crypto_points[0]
 
 
-def load_all_time_stock(symbol):
-    r = requests.get("https://www.alphavantage.co/query?function="
-                     "TIME_SERIES_DAILY&symbol=" + symbol + "&outputsize=full&apikey=" + daily_key)
-
-    if r.status_code != 200:
-        print("error" + r.status_code)
-    else:
-        return r.json()
 
 

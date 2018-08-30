@@ -5,9 +5,9 @@ import requests
 
 app = Flask(__name__)
 
-#TODO change stock api
-#TODO add advanced analytical graphs for stock (new key) https://plot.ly/python/line-charts/
+#TODO change stock api to IEX
 #TODO add percentage change from open
+#TODO add advanced analytical graphs for stock (new key) https://plot.ly/python/line-charts/
 #TODO refresh automatically
 #TODO Add session with favorites (maybe login)
 #TODO maybe incorporate crypto exchange from https://coinswitch.co/tools?utm_source=ph
@@ -29,8 +29,8 @@ def load_today_stock(stock_symbol):
     if stock_symbol == "Entry":
         stock_symbol = request.form['stock_name']
     graph_div = create_1_day_stock_graph(stock_symbol)
-    realtime_points = load_intraday_stock_data(stock_symbol)
-    data = load_daily_data(stock_symbol)
+    realtime_points = load_realtime_stock_price(stock_symbol)
+    data = load_today_data(stock_symbol)
 
     status = float(realtime_points) > float(data[3][1])
 
@@ -40,8 +40,8 @@ def load_today_stock(stock_symbol):
 @app.route('/stock/3-months/<stock_symbol>', methods=['GET'])
 def load_3_months_stock(stock_symbol):
     graph_div = create_3_months_stock_graph(stock_symbol)
-    realtime_points = load_intraday_stock_data(stock_symbol)
-    data = load_daily_data(stock_symbol)
+    realtime_points = load_realtime_stock_price(stock_symbol)
+    data = load_today_data(stock_symbol)
 
     status = float(realtime_points) > float(data[3][1])
 
@@ -51,8 +51,8 @@ def load_3_months_stock(stock_symbol):
 @app.route('/stock/6-months/<stock_symbol>', methods=['GET'])
 def load_6_months_stock(stock_symbol):
     graph_div = create_6_month_stock_graph(stock_symbol)
-    realtime_points = load_intraday_stock_data(stock_symbol)
-    data = load_daily_data(stock_symbol)
+    realtime_points = load_realtime_stock_price(stock_symbol)
+    data = load_today_data(stock_symbol)
 
     status = float(realtime_points) > float(data[3][1])
 
@@ -62,8 +62,8 @@ def load_6_months_stock(stock_symbol):
 @app.route('/stock/1-year/<stock_symbol>', methods=['GET'])
 def load_1_year_stock(stock_symbol):
     graph_div = create_1_year_stock_graph(stock_symbol)
-    realtime_points = load_intraday_stock_data(stock_symbol)
-    data = load_daily_data(stock_symbol)
+    realtime_points = load_realtime_stock_price(stock_symbol)
+    data = load_today_data(stock_symbol)
 
     status = float(realtime_points) > float(data[3][1])
 
@@ -71,10 +71,10 @@ def load_1_year_stock(stock_symbol):
                            graph=graph_div, data=data)
 
 @app.route('/stock/all-time/<stock_symbol>', methods=['GET'])
-def load_all_time_stock(stock_symbol):
-    graph_div = create_all_time_stock_graph(stock_symbol)
-    realtime_points = load_intraday_stock_data(stock_symbol)
-    data = load_daily_data(stock_symbol)
+def load_5_year_stock(stock_symbol):
+    graph_div = create_5_year_stock_graph(stock_symbol)
+    realtime_points = load_realtime_stock_price(stock_symbol)
+    data = load_today_data(stock_symbol)
 
     status = float(realtime_points) > float(data[3][1])
 

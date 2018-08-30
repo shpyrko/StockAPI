@@ -6,12 +6,10 @@ def create_1_day_stock_graph(symbol):
     date_time = []
     close_points = []
     json_data = load_intraday_stock_json(symbol)
-    for i in json_data['Time Series (5min)']:
-        if i[11:] == "09:30:00":
-            break
-        else:
-            date_time.append(i)
-            close_points.append(json_data['Time Series (5min)'][i]['4. close'])
+    for i in json_data:
+        date_time.append(i['minute'])
+        if i['average'] != -1:
+            close_points.append(i['average'])
 
     graph = plotly.offline.plot({
         "data": [go.Scatter(x=date_time, y=close_points)],
@@ -26,14 +24,10 @@ def create_1_day_stock_graph(symbol):
 def create_3_months_stock_graph(symbol):
     date_time = []
     close_points = []
-    json_data = load_daily_json_data(symbol)
-    for i in json_data['Time Series (Daily)']:
-        date_time.append(i)
-        close_points.append(float(json_data['Time Series (Daily)'][i]['4. close']))
-
-    for i in range(39):
-        date_time.pop()
-        close_points.pop()
+    json_data = load_3_month_stock(symbol)
+    for i in json_data:
+        date_time.append(i['date'])
+        close_points.append(i['close'])
 
     graph = plotly.offline.plot({
         "data": [go.Scatter(x=date_time, y=close_points)],
@@ -48,14 +42,11 @@ def create_3_months_stock_graph(symbol):
 def create_6_month_stock_graph(symbol):
     date_time = []
     close_points = []
-    json_data = load_all_time_stock(symbol)
-    for i in json_data['Time Series (Daily)']:
-        date_time.append(i)
-        close_points.append(float(json_data['Time Series (Daily)'][i]['4. close']))
+    json_data = load_6_month_stock(symbol)
+    for i in json_data:
+        date_time.append(i['date'])
+        close_points.append(i['close'])
 
-    for i in range(len(date_time) - 131):
-        date_time.pop()
-        close_points.pop()
 
     graph = plotly.offline.plot({
         "data": [go.Scatter(x=date_time, y=close_points)],
@@ -70,14 +61,10 @@ def create_6_month_stock_graph(symbol):
 def create_1_year_stock_graph(symbol):
     date_time = []
     close_points = []
-    json_data = load_all_time_stock(symbol)
-    for i in json_data['Time Series (Daily)']:
-        date_time.append(i)
-        close_points.append(float(json_data['Time Series (Daily)'][i]['4. close']))
-
-    for i in range(len(date_time) - 261):
-        date_time.pop()
-        close_points.pop()
+    json_data = load_1_year_stock(symbol)
+    for i in json_data:
+        date_time.append(i['date'])
+        close_points.append(i['close'])
 
     graph = plotly.offline.plot({
         "data": [go.Scatter(x=date_time, y=close_points)],
@@ -89,13 +76,13 @@ def create_1_year_stock_graph(symbol):
 
     return graph
 
-def create_all_time_stock_graph(symbol):
+def create_5_year_stock_graph(symbol):
     date_time = []
     close_points = []
-    json_data = load_all_time_stock(symbol)
-    for i in json_data['Time Series (Daily)']:
-        date_time.append(i)
-        close_points.append(float(json_data['Time Series (Daily)'][i]['4. close']))
+    json_data = load_5_year_stock(symbol)
+    for i in json_data:
+        date_time.append(i['date'])
+        close_points.append(i['close'])
 
     graph = plotly.offline.plot({
         "data": [go.Scatter(x=date_time, y=close_points)],
