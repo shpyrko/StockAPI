@@ -49,10 +49,20 @@
       <h1 class='col-lg-6 pt-3 text-center'>{{ symbol }} </h1>
     {% if status %}
       <h2 class='col-lg-6 pt-3 text-center text-success'> {{ realtime_points }}</h2>
+      </div>
+      <div class="row">
+          <p class='col-lg-6 text-success'></p>      
+      <p class='col-lg-6 text-center text-success'> {{ change_percent }} </p>
+      </div>    
     {% else %}
       <h2 class='col-lg-6 pt-3 text-center text-danger'>  {{ realtime_points }} </h2>
+        </div>
+    <div class="row">
+          <p class='col-lg-6 text-success'></p>  
+      <p class='col-lg-6 text-center text-danger'> {{ change_percent }} </p>
+    </div>
     {% endif %}
-      </div>
+
       
   <center>
     {{graph|safe}}

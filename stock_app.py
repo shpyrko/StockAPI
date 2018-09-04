@@ -5,7 +5,6 @@ import requests
 
 app = Flask(__name__)
 
-#TODO change stock api to IEX
 #TODO add percentage change from open
 #TODO add advanced analytical graphs for stock (new key) https://plot.ly/python/line-charts/
 #TODO refresh automatically
@@ -30,12 +29,13 @@ def load_today_stock(stock_symbol):
         stock_symbol = request.form['stock_name']
     graph_div = create_1_day_stock_graph(stock_symbol)
     realtime_points = load_realtime_stock_price(stock_symbol)
+    change_percent = load_change_percent(stock_symbol)
     data = load_today_data(stock_symbol)
 
     status = float(realtime_points) > float(data[3][1])
 
     return render_template('daily_pages/daily_stock.html', symbol=stock_symbol, status=status, realtime_points=realtime_points,
-                           graph=graph_div, data=data)
+                           change_percent=change_percent, graph=graph_div, data=data)
 
 @app.route('/stock/3-months/<stock_symbol>', methods=['GET'])
 def load_3_months_stock(stock_symbol):

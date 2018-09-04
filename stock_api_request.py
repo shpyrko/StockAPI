@@ -34,6 +34,15 @@ def load_daily_json_data(symbol):
     else:
         return r.json()
 
+def load_change_percent(symbol):
+    daily_stock_json_data = load_daily_json_data(symbol)
+    change_percent = float(daily_stock_json_data['changePercent']) * 100
+    if change_percent >  0:
+        output = "+" + str(round(change_percent, 2)) + "%"
+    else:
+        output = str(round(change_percent, 2)) + "%"
+    return output
+
 # load daily data returned as tuple list
 def load_today_data(symbol):
         daily_stock_json_data = load_daily_json_data(symbol)
