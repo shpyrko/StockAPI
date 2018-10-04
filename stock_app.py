@@ -1,13 +1,13 @@
 from flask import *
 from graph_generator import *
 from stock_api_request import *
-import requests
 
 app = Flask(__name__)
 
-#TODO add percentage change from open
+#TODO add more company informtion
+#TODO add search bar to daily stock
+#TODO add percentage change from open (forex, crypto)
 #TODO add advanced analytical graphs for stock (new key) https://plot.ly/python/line-charts/
-#TODO refresh automatically
 #TODO Add session with favorites (maybe login)
 #TODO maybe incorporate crypto exchange from https://coinswitch.co/tools?utm_source=ph
 
@@ -25,7 +25,7 @@ def crypto():
 
 @app.route('/stock/today/<stock_symbol>', methods=['POST', 'GET'])
 def load_today_stock(stock_symbol):
-    if stock_symbol == "Entry":
+    if stock_symbol == "quote":
         stock_symbol = request.form['stock_name']
     graph_div = create_1_day_stock_graph(stock_symbol)
     realtime_points = load_realtime_stock_price(stock_symbol)
